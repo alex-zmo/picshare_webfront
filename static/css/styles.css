@@ -10368,15 +10368,25 @@ body {
 }
 
 .sign-up-input {
-  margin : 0.5rem 0;
+  margin: 0.5rem 0;
 }
 
 .form-submit {
-  margin : 1rem 0;
+  margin: 1rem 0;
 }
 .signup-label {
-  width : 40%;
-  margin : 0.6rem 0;
-  text-align : right;
+  width: 40%;
+  margin: 0.6rem 0;
+  text-align: right;
   padding-right: 1rem;
+}
+.hover-faint a {
+  color: rgba(255, 255, 255, 0.5);
+}
+.hover-faint a:hover {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.text-off-white {
+  color: rgba(255, 255, 255, 0.5) !important;
 }

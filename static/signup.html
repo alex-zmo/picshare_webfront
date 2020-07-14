@@ -15,7 +15,7 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="css/styles.css" rel="stylesheet" />
 </head>
-<body id="page-top">
+<body id="page-top" onload="displayLogin()">
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
@@ -30,42 +30,68 @@
                 <li class="nav-item"><a class="nav-link js-scroll-trigger" onclick="nav('projects')">Projects</a></li>
                 <li class="nav-item"><a class="nav-link js-scroll-trigger" onclick="nav('signup')">Sign Up</a></li>
                 <li class="nav-item"><a class="nav-link js-scroll-trigger" onclick="nav('contact')">Contact</a></li>
-
             </ul>
         </div>
     </div>
 </nav>
+
 <!-- Signup-->
 <section class="signup-section" id="signup">
     <div class="container">
+        <div class="row" style="margin-bottom: 30px">
+            <div class="col-sm-4 col-md-4 col-lg-4"></div>
+            <div class="col-sm-2 col-md-2 col-lg-2 hover-faint" style="text-align: center">
+                <a style="font-size: 20px" onclick="displayLogin()" id="login-button">
+                    Login
+                </a>
+            </div>
+            <div class="col-sm-2 col-md-2 col-lg-2 hover-faint" style="text-align: center">
+                <a style="font-size: 20px" onclick="displaySignUp()" id="signup-button">
+                    Sign Up
+                </a>
+            </div>
+        </div>
         <div class="row">
-            <div class="col-md-10 col-lg-8 mx-auto text-center">
-                <h2 class="text-white mb-5">Create Your Account</h2>
+            <div class="col-md-10 col-lg-8 mx-auto text-center" id="signup-on">
+<!--                <h2 class="text-white mb-5">Create Your Account</h2>-->
                 <div class="row">
-                    <div class="signup-label text-white"> Email:    </div>
-                    <input class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0 sign-up-input" id="inputEmail" type="email" placeholder="johnsmith@example.com" />
+                    <div class="signup-label text-off-white"> Email:    </div>
+                    <input class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0 sign-up-input" id="inputEmail" type="email" placeholder="Email" />
                 </div>
                 <div class="row">
-                    <div class="signup-label text-white"> Username:    </div>
-                    <input class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0 sign-up-input" id="userName" type="input" placeholder="jsmith" />
+                    <div class="signup-label text-off-white"> Username:    </div>
+                    <input class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0 sign-up-input" id="userName" type="input" placeholder="Username" />
                 </div>
                 <div class="row">
-                    <div class="signup-label text-white"> First Name: </div>
-                    <input class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0 sign-up-input" id="firstName" type="input" placeholder="John" />
+                    <div class="signup-label text-off-white"> First Name: </div>
+                    <input class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0 sign-up-input" id="firstName" type="input" placeholder="First Name" />
                 </div>
                 <div class="row">
-                    <div class="signup-label text-white"> Last Name: </div>
-                    <input class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0 sign-up-input" id="lastName" type="input" placeholder="Smith" />
+                    <div class="signup-label text-off-white"> Last Name: </div>
+                    <input class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0 sign-up-input" id="lastName" type="input" placeholder="Last Name" />
                 </div>
                 <div class="row">
-                    <div class="signup-label text-white"> Password: </div>
+                    <div class="signup-label text-off-white"> Password: </div>
                     <input class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0 sign-up-input" id="password" type="password" placeholder="Password" />
                 </div>
                 <div class="row">
-                    <div class="signup-label text-white"> Confirm Password: </div>
+                    <div class="signup-label text-off-white"> Confirm Password: </div>
                     <input class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0 sign-up-input" id="confirmPassword" type="password" placeholder="Confirm Password" />
                 </div>
                 <button class="btn btn-primary mx-auto form-submit" onclick="signup()">Sign Up</button>
+            </div>
+<!--            Login-->
+            <div class="col-md-10 col-lg-8 mx-auto text-center" id="login-on">
+                <!--                <h2 class="text-off-white mb-5">Create Your Account</h2>-->
+                <div class="row">
+                    <div class="signup-label text-off-white"> Username / Email:    </div>
+                    <input class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0 sign-up-input" id="userNameLogin" type="input" placeholder="Username / Email" />
+                </div>
+                <div class="row">
+                    <div class="signup-label text-off-white"> Password: </div>
+                    <input class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0 sign-up-input" id="passwordLogin" type="password" placeholder="Password" />
+                </div>
+                <button class="btn btn-primary mx-auto form-submit" onclick="login()">Login</button>
             </div>
         </div>
     </div>

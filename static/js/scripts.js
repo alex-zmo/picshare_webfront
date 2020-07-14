@@ -3,6 +3,7 @@
     * Copyright 2013-2020 Start Bootstrap
     * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-grayscale/blob/master/LICENSE)
     */
+
     (function ($) {
     "use strict"; // Start of use strict
 
@@ -58,6 +59,7 @@
 
 const nav = (page) => window.location.replace(page === '' ? '/' : '/' + page + '.html');
 
+let urlHost = "http://localhost:8081";
 
 async function signup() {
     //Username, Password, First Name, Last Name, Email -> sign in via Email/User
@@ -95,9 +97,8 @@ async function signup() {
     };
 
     let hashedPassword = await sha256(password);
-    console.log(hashedPassword);
 
-    let url = "localhost:8081/signup?";
+    let url = urlHost + "/signup/?";
     url += "username=" + username + "&";
     url += "email=" + email + "&";
     url += "first_name=" + firstName + "&";
@@ -108,6 +109,32 @@ async function signup() {
     xhttp.open("GET", url);
     xhttp.send();
 }
+
+async function login() {
+    //Username, Password, First Name, Last Name, Email -> sign in via Email/User
+    let usernameEmail = document.getElementById('userNameLogin').value;
+    let passwordLogin = document.getElementById('passwordLogin').value;
+
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (xhttp.readyState === 4) {
+            if (xhttp.status === 200) {
+                alert(xhttp.responseText);
+            } else if (xhttp.status === 401) {
+                alert(xhttp.responseText);
+            }
+        }
+    };
+
+    let hashedPassword = await sha256(passwordLogin);
+    let url = urlHost + "/login/?";
+    url += "usernameEmail=" + usernameEmail + "&";
+    url += "password=" + hashedPassword;
+
+    xhttp.open("GET", url);
+    xhttp.send();
+}
+
 
 function validateEmail(email) {
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -131,4 +158,23 @@ async function sha256(message) {
 
     // convert bytes to hex string
     return  hashArray.map(b => ('00' + b.toString(16)).slice(-2)).join('');
+}
+
+function displayLogin() {
+    document.getElementById("login-on").style["display"] = "initial";
+    document.getElementById("signup-on").style["display"] = "none";
+    document.getElementById("login-button").style["font-weight"] = "bold";
+    document.getElementById("login-button").style["color"] = "#fff";
+    document.getElementById("signup-button").style["font-weight"] = "normal";
+    document.getElementById("signup-button").style["color"] = "rgba(255, 255, 255, 0.5)";
+
+}
+
+function displaySignUp() {
+    document.getElementById("signup-on").style["display"] = "initial";
+    document.getElementById("login-on").style["display"] = "none";
+    document.getElementById("signup-button").style["font-weight"] = "bold";
+    document.getElementById("signup-button").style["color"] = "#fff";
+    document.getElementById("login-button").style["font-weight"] = "normal";
+    document.getElementById("login-button").style["color"] = "rgba(255, 255, 255, 0.5)";
 }
