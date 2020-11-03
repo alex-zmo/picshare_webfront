@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Gallery</title>
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="css/styles.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+</head>
+<body id="page-top" onload="checkToDisplay(); getImages(); generateNavBar(); showToggle();  hidePersonalButtons(); " >
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container" id="mainNavContainer">
+        <a class="navbar-brand js-scroll-trigger"  style ="cursor:pointer;" onclick="nav('')">Home</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+</nav>
+<!-- Masthead-->
+<div>
+<!--    <div id="gallery-loading" style="">-->
+<!--        <h4 id="gal" class="text-white-50 text-align-center text-uppercase">Retrieving Gallery</h4>-->
+
+<!--        <div class="no-freeze-spinner">-->
+<!--            <div id="no-freeze-spinner">-->
+<!--                <div>-->
+<!--                    <i class="material-icons">-->
+<!--                        account_circle-->
+<!--                    </i>-->
+<!--                    <i class="material-icons">-->
+<!--                        home-->
+<!--                    </i>-->
+<!--                    <i class="material-icons">-->
+<!--                        work-->
+<!--                    </i>-->
+<!--                    <div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--        </div>-->
+
+<!--    </div>-->
+    <div style="background-color : black; height : 95px"></div>
+    <div id="filter-bar" style="display:none;">
+        <div class="row" style="height: 20px"></div>
+        <div class="row" style="place-items: center; display: grid;" >
+            <div class="row multi-button">
+                <div onclick="global()">
+                    <input name="buttons" type="checkbox" id="btn1" checked="checked" >
+                    <label class="filter-label" for="btn1">
+    <span class="filter-span"><?xml version="1.0" encoding="UTF-8"?>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="2" y1="12" x2="22" y2="12"></line>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+        </svg>
+        </span>
+                        <span id="global-text" style="text-decoration: underline;">Global</span></label>
+                </div>
+
+                <div onclick="personal()"> <input name="buttons" type="checkbox" id="btn2">
+                    <label class="filter-label" for="btn2">
+    <span class="filter-span"><?xml version="1.0" encoding="UTF-8"?>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+    </span><span id="personal-text">Personal</span></label></div>
+
+                <div onclick="sortByLike()"><input name="buttons" type="checkbox" id="btn-sort-likes">
+
+                    <label class="filter-label" for="btn-sort-likes">
+    <span class="filter-span"><?xml version="1.0" encoding="UTF-8"?>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+    </span>Likes</label></div>
+
+                <div onclick="sortByFave()"> <input name="buttons" type="checkbox" id="btn-sort-faves">
+
+                    <label class="filter-label" for="btn-sort-faves">
+    <span class="filter-span"><?xml version="1.0" encoding="UTF-8"?>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bookmark"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+    </span>Favorites</label></div>
+                <div onclick="sortByDate()"> <input name="buttons" type="checkbox" id="btn-sort-date">
+
+                    <label class="filter-label" for="btn-sort-date">
+    <span class="filter-span"><?xml version="1.0" encoding="UTF-8"?>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+    </span>Date</label></div>
+            </div>
+        </div></div>
+    <div id = "gallery" class = "container" data-delay="1500" style=" margin-top: 20px;margin-bottom: 15px;"></div>
+    <div id="opacity-overlay-screen" class="overlay-entire-background" style="display: none; z-index:999;" onclick="hideFull()"></div>
+    <div id="opacity-overlay" class="overlay-background" style="display: none;   z-index: 9999 !important;" >
+        <div class="row" style="height: 100%; ">
+            <div class="col-sm-12 col-md-12 col-lg-8 overlay-inner-background" >
+                <img src="" alt="full-image" id="full" class="overlay-display" style="display: none;" />
+                <div id="personal-buttons-on-image" style="display: none;">
+                    <div class = "row" style="font-size: 14px; position: absolute; bottom: 0; width: 100%; right: 0%;margin-bottom: 12px;margin-right: 10px;">
+                        <div class="col-10" style="text-align: center;"></div>
+                        <div class="col-1" style="text-align: center; color: white !important;"><i class="far fa-eye " id="visibility" style=" cursor: pointer;" onclick="hideImage()"></i></div>
+                        <div class="col-1" style="text-align: center; color: white !important;"><i class="far fa-trash-alt " style=" cursor: pointer;" onclick="deleteImage()"></i></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="display-buttons-or-login"  class="col-sm-12 col-md-12 col-lg-4 functions flex-lg-grow-1 justify-content-center align-items-center align-content-center" style="display:none; overflow: scroll;" >
+                <div style ="position: absolute; top: 0px; right: 0px; z-index: 400;">
+                    <span class="fas fa-times " style="margin-right: 25px; margin-top: 7px; cursor: pointer;" onclick="hideFull()"></span>
+                </div>
+                <div class="detailBox" style="height: 100%; padding-top: 30px;">
+                    <div class="titleBox justify-content-center align-items-center" style="text-align:center; border-bottom:1px solid #bbb;">
+                        <label>PICSHARE</label>
+                        <div class="row" id="global-buttons-on-image" style="font-size: 14px; position: relative;  width: 100% ; margin-right: 0px; margin-left: 0px;  " >
+                            <div class="col-sm-1 col-md-3 col-lg-3 justify-content-center" style="text-align: center; margin-bottom: 10px !important; margin-top: 10px !important;"><i class="far fa-heart " id="like-heart" onclick = "likeImage()" style="cursor: pointer;display: inline;"></i> <span id="like-count"></span></div>
+                            <div class="col-sm-2 col-md-3 col-lg-3" style="text-align: center; margin-bottom: 10px !important; margin-top: 10px !important;"><i class="far fa-bookmark" id="add-favorite" onclick = "favoriteImage()" style="cursor: pointer;"></i></div>
+                            <div class="col-sm-1 col-md-3 col-lg-3" style="text-align: center; margin-bottom: 10px !important; margin-top: 10px !important;"><i class="far fa-calendar" id="cal-created" onclick = "displayCreatedAt()" style="cursor: pointer;" ></i></div>
+                            <div class="col-sm-1 col-md-3 col-lg-3" style="margin-bottom: 10px !important; margin-top: 10px !important;">
+                                <div id="btn-download" data-toggle="tooltip" title="Download Full Res Image" onclick='downloadAnimate()'>
+                                    <a id='download-full'>
+                                        <svg width="22px" height="16px" viewBox="0 0 22 16">
+                                            <path d="M2,10 L6,13 L12.8760559,4.5959317 C14.1180021,3.0779974 16.2457925,2.62289624 18,3.5 L18,3.5 C19.8385982,4.4192991 21,6.29848669 21,8.35410197 L21,10 C21,12.7614237 18.7614237,15 16,15 L1,15" id="check"></path>
+                                            <polyline points="4.5 8.5 8 11 11.5 8.5" class="svg-out"></polyline>
+                                            <path d="M8,1 L8,11" class="svg-out"></path>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="commentBox"  >
+                        <span>
+                            <p class="taskDescription" style="margin-top: 10px; padding-bottom: 0px;">Comments</p>
+                            <label id="display-created-at" class="small" style="position: absolute; top:11.5%; left:50%; transform: translateX(-50%); "></label>
+                        </span>
+                    </div>
+                    <div class="actionBox" >
+                        <ul id="comment-list" class="commentList">
+                            <!--                            comments populated here-->
+                        </ul>
+                        <form class="form-inline" autocomplete="off">
+                            <div class="form-group" >
+                                <input id="comment-input" class="form-control" autocomplete="off" type="text" style="font-size: 12px; overflow: auto;" onkeypress="return event.keyCode != 13;" onkeyup="sendEnterComment()" placeholder="Your comments" />
+                            </div>
+                            <div class="form-group">
+                                <i class="far fa-paper-plane" style="cursor: pointer;" onclick="sendComment()"></i>
+                            </div>
+                        </form>
+                    </div>
+                    <span class="small" style="margin-left: 20px; margin-top: 10px;">Greyscale Sliders</span>
+
+                    <div class="row justify-content-end" style="position: relative; top: 0px">
+                        <div class="col-9" style="">
+                            <div class="sliderset" style="position: relative; z-index: 99999; left: 0%; top: 0%; ">
+                                <div class="slider red"></div>
+                                <div class="slider green"></div>
+                                <div class="slider blue"></div>
+                            </div>
+                        </div>
+
+                        <div class="col-3" style="">
+                            <div style="justify-items: center; text-align: center; margin-top: 12px; cursor: pointer;" onclick="liveGrey(sliderRed, sliderGreen, sliderBlue)">
+                                <i class="far fa-images" ></i>
+                            </div>
+                            <div style="text-align: center; display: none" id="btn-download-greyscale" class="btn-download" onclick='downloadAnimateGreyscale()' >
+                                <a id="download-greyscale-1">
+                                    <svg width="18px" height="18px" viewBox="0 0 22 16">
+                                        <path d="M2,10 L6,13 L12.8760559,4.5959317 C14.1180021,3.0779974 16.2457925,2.62289624 18,3.5 L18,3.5 C19.8385982,4.4192991 21,6.29848669 21,8.35410197 L21,10 C21,12.7614237 18.7614237,15 16,15 L1,15" class="check-svg"></path>
+                                        <polyline points="4.5 8.5 8 11 11.5 8.5" class="svg-out"></polyline>
+                                        <path d="M8,1 L8,11" class="svg-out"></path>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="display-login-or-signup" class="col-md-4 col-lg-4 functions flex-lg-grow-1" style="display:none;" >
+                <span class="fas fa-times " style="position: absolute; top: 0px; right:0px;margin-right: 20px; margin-top: 7px; cursor: pointer;" onclick="hideFull()"></span>
+                <div style="padding: 15%; padding-top: 45%;">
+                    <div style="text-align: left">Sign up to like, favorite, or download this image.
+                        <br>
+                        <br>
+                        <div id="redirect-signup" class="text-primary" style=" cursor: pointer; text-align: justify;">
+                            <span>Sign Up</span>
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div style="text-align: left">Or if you have an account, please log in.
+                        <br>
+                        <br>
+                        <div id="redirect-login" class="text-primary" style=" cursor: pointer; text-align: justify;">
+                            <span>Login</span>
+                            <i class="fas fa-sign-in-alt"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <canvas id="showImage" width="200" height="200"></canvas>
+</div>
+</body>
+<script>
+
+
+    // setTimeout(function() {
+    //     let element = document.getElementById('gallery-loading');
+    //     element.classList += "hidden";
+    //     document.body.style["overflow"] = 'auto';
+    // }, 800);
+
+    let sliderRed = 50.00/ 100;
+    let sliderGreen = 50.00/ 100;
+    let sliderBlue = 50.00/ 100 ;
+
+    (function ($) {
+        "use strict"; // Start of use strict
+        $(document).ready(function () {
+            $(".slider").slider({
+                orientation: "horizontal",
+                range: "min",
+                max: 100,
+                value: 0,
+                animate: 500
+            });
+
+            $('.slider').each(function (index) {
+                $(this).slider("value", 50);
+                console.log($(this).slider("value"))
+                this.index = index
+            });
+
+            $(".slider" ).slider({
+                // options
+                start: function (event, ui) {
+                    // code
+                },
+                slide: function( event, ui ) {
+                    // code
+                },
+                change: function(event, ui) {
+                    if(this.index === 0) {
+                        sliderRed = ui.value /100
+                    } else if (this.index === 1) {
+                        sliderGreen = ui.value / 100
+                    } else if(this.index === 2) {
+                        sliderBlue= ui.value / 100
+                    }
+                }
+            });
+
+            function createHoverState(myobject) {
+                myobject.hover(function () {
+                    $(this).prev().toggleClass('hilite');
+                });
+                myobject.mousedown(function () {
+                    $(this).prev().addClass('dragging');
+                    $("*").mouseup(function () {
+                        $(myobject).prev().removeClass('dragging');
+                    });
+                });
+            }
+            createHoverState($(".slider a.ui-slider-handle"));
+        });
+    })(jQuery);
+
+    function resetSliders() {
+        (function ($) {
+            "use strict"; // Start of use strict
+            $('.slider').each(function (index) {
+                $(this).slider("value", 50);
+                console.log($(this).slider("value"))
+                this.index = index
+            });
+        })(jQuery);
+    }
+</script>
+<!-- Footer-->
+<footer class="footer bg-black small text-center text-white-50"><div class="container">Copyright © PicShare Inc. 2020</div></footer>
+<!-- Bootstrap core JS-->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+<!-- Third party plugin JS-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+<!-- Core theme JS-->
+<script src="js/scripts.js"></script>
+
+</html>

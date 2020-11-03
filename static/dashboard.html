@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Dashboard</title>
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="css/styles.css" rel="stylesheet" />
+</head>
+<body id="page-top" onload="generateNavBar(); writeWelcome(); writeJoined();writeCount(); writeInfo(); writeLikesInfo(); writeFavoritesInfo();">
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container" id="mainNavContainer">
+        <a class="navbar-brand js-scroll-trigger" style ="cursor:pointer;" onclick="nav('')">Home</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+</nav>
+<div id="wait-on-upload" style="position: absolute; height: 100%; width: 100%; background: rgba(20,20,20,0.5); z-index: 9999; display: none;">
+    <div id="uploading-text" style="display:none" class="loading">
+        <div class="loading-text">
+            <span class="loading-text-words">U</span>
+            <span class="loading-text-words">P</span>
+            <span class="loading-text-words">L</span>
+            <span class="loading-text-words">O</span>
+            <span class="loading-text-words">A</span>
+            <span class="loading-text-words">D</span>
+            <span class="loading-text-words">I</span>
+            <span class="loading-text-words">N</span>
+            <span class="loading-text-words">G</span>
+            <span class="loading-text-words">.</span>
+            <span class="loading-text-words">.</span>
+            <span class="loading-text-words">.</span>
+        </div>
+    </div>
+</div>
+
+<section class="signup-section bg-black" id="contact" >
+    <div class="container">
+        <div class="row" style="height:20px;" >
+        </div>
+        <div class="row">
+            <div class="col-5">
+                <div class="modal" id="modal-class">
+                    <div class="modal-container">
+                        <div class="modal-left">
+                            <div class="row">
+                                <div>
+                                    <i class="far fa-user-circle fa-2x text-primary-1  mb-2" style="margin-left:10px"></i>
+                                </div>
+                                <div>
+                                    <h4 class="modal-title text-uppercase" id="user-placeholder" style=" margin-left: 10px;">Hello User</h4>
+                                </div>
+                            </div>
+                            <p class="modal-desc" id="joined-placeholder">Joined on</p>
+                            <div class="row" style="height: 10%;"></div>
+
+                            <div class="row">
+                                <div class="col-1"></div>
+                                <div class="col-11" style="padding-left: 0px;">
+                                    <div class="small text-primary-1 stats"> Username:  <span style="font-weight: bold; padding-left: 85px;" id="username-display"></span> </div>
+                                    <div class="small text-primary-1 stats"> Email:   <span style="font-weight: bold; padding-left:115px;" id="email-display"></span></div>
+                                    <div class="small text-primary-1 stats"> First Name:   <span style="font-weight: bold; padding-left: 78px;" id="first-name-display"></span></div>
+                                    <div class="small text-primary-1 stats"> Last Name:   <span style="font-weight: bold; padding-left: 81px;" id="last-name-display"></span></div>
+                                    <div class="small text-primary-1 stats"> Account Type:   <span  style="font-weight: bold; padding-left: 60px;" id="account-type-display"></span></div>
+                                </div>
+                            </div>
+                            <div class="row" style="height: 5%;"></div>
+
+                            <div class="row">
+                                <div class="col-1"></div>
+                                <div class="col-10" style="padding-left: 0px;">
+                                    <div class="small text-primary-1 stats" > Images Uploaded:   <span style="font-weight: bold; padding-left: 35px;" id="pic-count"></span></div>
+                                    <div class="small text-primary-1 stats" > Likes Sent:  <span style="font-weight: bold; padding-left: 81px;" id="like-count-total"></span> </div>
+                                    <div class="small text-primary-1 stats" > Likes Received:   <span style="font-weight: bold; padding-left: 51px;" id="liked-count-total"></span></div>
+                                    <div class="small text-primary-1 stats" > Favorites:   <span style="font-weight: bold; padding-left: 88px;" id="favorite-count-total"></span></div>
+                                </div>
+                            </div>
+                            <div class="row" style="height: 15%;"></div>
+
+                            <div class="row">
+                                <div class="col-1"></div>
+                                <div class="col-10" style="padding-left: 0px;">
+                                    <div class="text-primary-1" style=" cursor: pointer; text-align: right;" onclick="logout()">
+                                        <span>Logout </span><i class="fas fa-sign-out-alt "></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-right">
+                            <img src="../assets/img/bigrok15.jpg" alt="">
+                        </div>
+                        <button class="icon-button close-button" onclick="closeModal()">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+                                <path d="M 25 3 C 12.86158 3 3 12.86158 3 25 C 3 37.13842 12.86158 47 25 47 C 37.13842 47 47 37.13842 47 25 C 47 12.86158 37.13842 3 25 3 z M 25 5 C 36.05754 5 45 13.94246 45 25 C 45 36.05754 36.05754 45 25 45 C 13.94246 45 5 36.05754 5 25 C 5 13.94246 13.94246 5 25 5 z M 16.990234 15.990234 A 1.0001 1.0001 0 0 0 16.292969 17.707031 L 23.585938 25 L 16.292969 32.292969 A 1.0001 1.0001 0 1 0 17.707031 33.707031 L 25 26.414062 L 32.292969 33.707031 A 1.0001 1.0001 0 1 0 33.707031 32.292969 L 26.414062 25 L 33.707031 17.707031 A 1.0001 1.0001 0 0 0 32.980469 15.990234 A 1.0001 1.0001 0 0 0 32.292969 16.292969 L 25 23.585938 L 17.707031 16.292969 A 1.0001 1.0001 0 0 0 16.990234 15.990234 z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-4 mb-3 mb-md-0">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--    asdkfjaslkfjlasdf -->
+    <div class="container"></div>
+    <div class="pmodal" id="pmodal-class-password">
+        <div class="pmodal-container">
+            <div class="pmodal-left">
+                <h1 class="pmodal-title">Change Password</h1>
+                <p class="pmodal-desc">New password cannot be any of the three (3) most recent passwords.</p>
+
+
+                <div class="row" style="height: 20%;">
+                    <div class="col-12" style="display:flex; align-items: center; justify-content: center; min-height: 0px; ">
+                        <span id ="lock-ani" class="lock" onclick="toggleLock()"></span>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-2 text-primary-1" style="padding-top: 0px; text-align: justify; padding-right: 0px;">
+                        <div style="text-align: center;"><span class="fas fa-key" style="display: inline-block; margin-top: 1.2rem; color: white;"></span></div>
+                        <div style="text-align: center;"><span class="fas fa-unlock" style="display: inline-block; margin-top: 1.4rem; color: white;"></span></div>
+                        <div style="text-align: center;"><span class="fas fa-unlock-alt" style="display: inline-block; margin-top: 1.4rem; color: white;"></span></div>
+                    </div>
+                    <div class="col-10">
+                        <div class="row text-primary-1">
+                            <input class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0 sign-up-input pw" id="currentPassword" type="password" placeholder="Current Password" />
+                        </div>
+                        <div class="row text-primary-1">
+                            <input class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0 sign-up-input pw" id="newChangePassword" type="password" onkeyup="check()" placeholder="New Password" />
+                        </div>
+                        <div class="row text-primary-1">
+                            <input class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0 sign-up-input pw"  id="confirmNewChangePassword" type="password" onkeyup="check()" placeholder="Confirm New Password" />
+                        </div>
+                        <div class ="row  small" id = "message" style="margin-top: 10px; color: rgba(255,90,90,0);"> Passwords Do Not Match   </div>
+                    </div>
+
+                </div>
+                <div class="row" style="height: 10%;"></div>
+
+                <div class="row">
+                    <div class="col-1"></div>
+                    <div class="col-10" style="padding-left: 0px;">
+                        <div class="text-primary-1" style=" cursor: pointer; text-align: right;" onclick="changePassword()">
+                            <span>Change Password </span><i class="fas fa-key"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pmodal-right">
+                <img src="assets/img/bigrok92.jpg" alt="">
+            </div>
+            <button class="icon-button close-button" onclick="closeModalPassword()">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+                    <path d="M 25 3 C 12.86158 3 3 12.86158 3 25 C 3 37.13842 12.86158 47 25 47 C 37.13842 47 47 37.13842 47 25 C 47 12.86158 37.13842 3 25 3 z M 25 5 C 36.05754 5 45 13.94246 45 25 C 45 36.05754 36.05754 45 25 45 C 13.94246 45 5 36.05754 5 25 C 5 13.94246 13.94246 5 25 5 z M 16.990234 15.990234 A 1.0001 1.0001 0 0 0 16.292969 17.707031 L 23.585938 25 L 16.292969 32.292969 A 1.0001 1.0001 0 1 0 17.707031 33.707031 L 25 26.414062 L 32.292969 33.707031 A 1.0001 1.0001 0 1 0 33.707031 32.292969 L 26.414062 25 L 33.707031 17.707031 A 1.0001 1.0001 0 0 0 32.980469 15.990234 A 1.0001 1.0001 0 0 0 32.292969 16.292969 L 25 23.585938 L 17.707031 16.292969 A 1.0001 1.0001 0 0 0 16.990234 15.990234 z"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+    <!--asdfjhsakldfjlasdf-->
+    <div class="umodal" id="umodal-class-upload">
+        <div class="umodal-container">
+            <div class="umodal-left">
+                <h1 class="umodal-title">Upload Image</h1>
+                <p class="umodal-desc">Image must have .JPG or .PNG Extensions. File size limit 80 MB.</p>
+                <div class="row" style="height: 5%;"></div>
+                <div class="row">
+                    <div class="col-2 text-primary-1" style="padding-top: 0px; text-align: justify; padding-right: 0px;">
+                    </div>
+                    <div class="col-10">
+                        <div class="uploader">
+                            <input type="file" accept="image/*" id="image-upload" title="" class="drop-uploader-here" onchange="fileChange();">
+                            <div class="text-er text-uploader-drop">drop here</div>
+                            <div class="text-er text-uploader-upload" >uploading</div>
+                            <svg class="progress-uploader-wrapper" width="300" height="300">
+                                <circle class="progresser" r="105" cx="150" cy="150"></circle>
+                            </svg>
+                            <svg class="check-uploader-wrapper" width="130" height="130">
+                                <polyline  class="checker" points="100.2,40.2 51.5,88.8 29.8,67.5 "/>
+                            </svg>
+                            <div id="attempt-upload" class="shadower"></div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row" style="height: 2%;"></div>
+                <div class="row">
+                    <div class="col-1" ></div>
+                    <div class="col-10" style="padding-left: 0px;">
+                        <div class="text-primary-1" style=" cursor: pointer; text-align: center;" >
+                            <span id="filename"> </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="height: 6%;"></div>
+                <div class="row text-primary-1" >
+                    <h7 id="instructions" style="text-align: center; align-items: center;margin-left:27%;">Add or drop file above</h7>
+                </div>
+            </div>
+            <div class="umodal-right">
+                <img src="assets/img/bigrok87.jpg" alt="">
+            </div>
+            <button class="icon-button close-button" onclick="closeModalUpload()">
+                <svg xmlns="http://www.w3.org/2000/svg" style="fill: white;"viewBox="0 0 50 50">
+                    <path d="M 25 3 C 12.86158 3 3 12.86158 3 25 C 3 37.13842 12.86158 47 25 47 C 37.13842 47 47 37.13842 47 25 C 47 12.86158 37.13842 3 25 3 z M 25 5 C 36.05754 5 45 13.94246 45 25 C 45 36.05754 36.05754 45 25 45 C 13.94246 45 5 36.05754 5 25 C 5 13.94246 13.94246 5 25 5 z M 16.990234 15.990234 A 1.0001 1.0001 0 0 0 16.292969 17.707031 L 23.585938 25 L 16.292969 32.292969 A 1.0001 1.0001 0 1 0 17.707031 33.707031 L 25 26.414062 L 32.292969 33.707031 A 1.0001 1.0001 0 1 0 33.707031 32.292969 L 26.414062 25 L 33.707031 17.707031 A 1.0001 1.0001 0 0 0 32.980469 15.990234 A 1.0001 1.0001 0 0 0 32.292969 16.292969 L 25 23.585938 L 17.707031 16.292969 A 1.0001 1.0001 0 0 0 16.990234 15.990234 z"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+    <div id="dashboard-head" class="container d-flex h-100 align-items-center">
+        <div id="dashboard-head-2"class="mx-auto text-center mt-4">
+            <h2 class="text-primary-1 mx-auto mt-4 mb-0" style="opacity:0.8; ">Welcome to your Dashboard</h2>
+            <h6 class="text-primary-1 mx-auto mt-4 mb-0" style="opacity:0.8;">View your stats, upload an image, change your password, or logout below!</h6>
+        </div>
+    </div>
+
+    <div id="container-card" class="container-card " style="opacity: 0.9;">
+        <div id="account-card" class="box-card box-card-1" onclick="openModal()" style="cursor: pointer;">
+            <div class="cover-card"><img class="display-card" src="assets/img/card-1.png" alt=""></div>
+            <button class="button-card"><div class="div-card text-uppercase"></div></button>
+        </div>
+        <div id="upload-card" class="box-card box-card-2" onclick="openModalUpload()" style="cursor: pointer;">
+            <div class="cover-card"><img class="display-card" src="assets/img/card-2.png" alt=""></div>
+            <button class="button-card"><div class="div-card text-uppercase"></div></button>
+        </div>
+        <div id="change-password-card" class="box-card box-card-3" onclick="openModalPassword()" style="cursor: pointer;">
+            <div class="cover-card"><img class="display-card" src="assets/img/card-3.png" alt=""></div>
+            <button class="button-card"><div class="div-card text-uppercase"></div></button>
+        </div>
+        <div id="logout-card" class="box-card box-card-4" onclick="logout()" style="cursor: pointer;">
+            <div class="cover-card"><img class="display-card" src="assets/img/card-4.png" alt=""></div>
+            <button class="button-card"><div class="div-card text-uppercase"></div></button>
+        </div>
+    </div>
+</section>
+<script>
+
+        let beginUpload = document.getElementsByClassName("progresser")[0];
+        beginUpload.addEventListener("animationend", function(){
+            document.getElementById("uploading-text").style["display"]="block";
+            upload();
+        });
+
+        let fileUpload = document.querySelector(".uploader");
+
+        fileUpload.addEventListener("dragover", function() {
+            this.classList.add("drag");
+            this.classList.remove("drop", "done");
+        });
+
+        fileUpload.addEventListener("dragleave", function() {
+            this.classList.remove("drag");
+        });
+
+        fileUpload.addEventListener("drop", start, false);
+        fileUpload.addEventListener("change", start, false);
+
+        function start() {
+            this.classList.remove("drag");
+            this.classList.add("drop");
+            setTimeout(() => this.classList.add("done"), 3000);
+        }
+
+
+
+        function toggleLock() {
+            let lock = document.getElementById("lock-ani");
+            lock.classList.toggle("unlocked")
+        }
+
+</script>
+<footer class="footer bg-black small text-center text-white-50"><div class="container">Copyright © PicShare Inc. 2020</div></footer>
+<!-- Bootstrap core JS-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+<!-- Third party plugin JS-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+<!-- Core theme JS-->
+<script src="js/scripts.js"></script>
+</body>
+</html>

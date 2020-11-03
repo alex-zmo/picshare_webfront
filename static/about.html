@@ -15,40 +15,120 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="css/styles.css" rel="stylesheet" />
 </head>
-<body id="page-top">
+<body id="page-top" onload="generateNavBar()">
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-    <div class="container">
-        <a class="navbar-brand js-scroll-trigger" onclick="nav('')">Home</a>
+    <div class="container" id="mainNavContainer">
+        <a class="navbar-brand js-scroll-trigger" style ="cursor:pointer;" onclick="nav('')">Home</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             Menu
             <i class="fas fa-bars"></i>
         </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" onclick="nav('about')">About</a></li>
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" onclick="nav('projects')">Projects</a></li>
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" onclick="nav('signup')">Sign Up</a></li>
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" onclick="nav('contact')">Contact</a></li>
-
-            </ul>
-        </div>
     </div>
 </nav>
 <!-- About-->
 <section class="about-section text-center" id="about">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-8 mx-auto">
-                <h2 class="text-white mb-4">Built with Bootstrap 4</h2>
-                <p class="text-white-50">
-                    Grayscale is a free Bootstrap theme created by Start Bootstrap. It can be yours right now, simply download the template on
-                    <a href="https://startbootstrap.com/template-overviews/grayscale/">the preview page</a>
-                    . The theme is open source, and you can use it for any purpose, personal or commercial.
-                </p>
+        <div class="row pseudo-mast-2" style="margin-bottom:3%; margin-top: -50px !important;">
+            <h1 class="mx-auto my-0 text-uppercase">Picshare</h1>
+        </div>
+        <div class="row mt-0 mb-5">
+            <div class="col-4"></div>
+            <div class="col-md-4 col-sm-8 justify-content-center">
+                <a href="https://youtu.be/5MT0i25gyH4" style="text-decoration: none;">
+                    <svg version="1.1" id="play" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" height="75px" width="55px"
+                         viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve"><path class="stroke-solid" fill="none" stroke="rgba(0, 0, 0, 0.7)"  d="M49.9,2.5C23.6,2.8,2.1,24.4,2.5,50.4C2.9,76.5,24.7,98,50.3,97.5c26.4-0.6,47.4-21.8,47.2-47.7
+    C97.3,23.7,75.7,2.3,49.9,2.5"/><path class="icon-play" fill="rgba(0, 0, 0, 0.7)" d="M38,69c-1,0.5-1.8,0-1.8-1.1V32.1c0-1.1,0.8-1.6,1.8-1.1l34,18c1,0.5,1,1.4,0,1.9L38,69z"/>
+</svg>
+                    <span class="text-uppercase text-black-50" style="font-weight: 600; cursor:pointer;">watch video</span></a>
             </div>
         </div>
-        <img class="img-fluid" src="assets/img/ipad.png" alt="" />
+    </div>
+    <div class="row" style="margin-top: 0%" >
+        <div class="col-lg-8 mx-auto">
+            <h2 class="text-white mb-5" style="margin-bottom: 1rem !important;" >Built by creatives, for creatives</h2>
+            <p class="text-primary-1" style="margin-bottom: 0rem;" >
+                PicShare is a free online service to display your pictures to those around you.
+                Share your pictures and explore the variety of built-in effects to apply to your images.
+                Save your favorites by adding them to your bookmarks, or support the uploader by dropping a like.
+                The service is free to use and open to all creatives. Enjoy!
+            </p>
+        </div>
+    </div>
+    <div class="container contact-section" style="background: none; margin-top: 0%;">
+        <div class="row" style=" opacity: 0.8; ">
+            <div class="col-md-4 col-lg-4 col-sm-12 mb-3 mb-md-0">
+                <figure class="snip1401" >
+                    <img src="assets/img/about-mini-bg-1.jpg" alt="star-image-1" />
+                    <figcaption>
+                        <h3>Tour</h3>
+                        <p>Browse through pictures, drop a like to support the sharer or favorite them to keep for later!</p>
+                    </figcaption><i class="ion-ios-home-outline"></i>
+<!--                    <a href="#"></a>-->
+                </figure>
+            </div>
+            <div class="col-md-4 col-lg-4 col-sm-12 mb-3 mb-md-0">
+                <figure class="snip1401">
+                    <img src="assets/img/about-mini-bg-2.jpg" alt="star-image-2" />
+                    <figcaption>
+                        <h3>Alter</h3>
+                        <p>Play around with various alter functionality and download your new image!</p>
+                    </figcaption><i class="ion-ios-personadd-outline"></i>
+<!--                    <a href="#"></a>-->
+                </figure>
+            </div>
+            <div class="col-md-4 col-lg-4 col-sm-12 mb-3 mb-md-0">
+                <figure class="snip1401" ><img src="assets/img/about-mini-bg-3.jpg" alt="star-image-3" />
+                    <figcaption>
+                        <h3>Share</h3>
+                        <p>Upload your own images and share your aesthetics with the world! </p>
+                    </figcaption><i class="ion-ios-location-outline"></i>
+<!--                    <a href="#"></a>-->
+                </figure>
+            </div>
+        </div>
+    </div>
+
+    <div class="container contact-section justify-content-center" style="background: none; padding-top: 0rem;">
+        <div class="row text-primary-1">
+            <div class="col-md-4 mb-3 mb-md-0">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-map  mb-2"></i>
+                        <h4 class="text-uppercase m-0 ">Explore</h4>
+                        <hr class="my-4" />
+                        <div class="small ">Explore the gallery, check out the aesthetics</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3 mb-md-0">
+                <div class="card  h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-upload mb-2"></i>
+                        <h4 class="text-uppercase m-0">Upload</h4>
+                        <hr class="my-4" />
+                        <div class="small">Upload your own images to show off to the public</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3 mb-md-0">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-paint-brush mb-2"></i>
+                        <h4 class="text-uppercase m-0 ">Edit</h4>
+                        <hr class="my-4" />
+                        <div class="small">Apply preset filters and download any pictures</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="social d-flex justify-content-center text-primary-1">
+            <a class="mx-2 instagram" href="https://www.instagram.com/mohr_alex/"><i class="fab fa-instagram "></i></a>
+            <a class="mx-2 facebook" href="#!"><i class="fab fa-facebook-f"></i></a>
+            <a class="mx-2 linkedin" href="https://www.linkedin.com/in/georgealexmo/"><i class="fab fa-linkedin"></i></a>
+        </div>
+    </div>
     </div>
 </section>
 <!-- Footer-->

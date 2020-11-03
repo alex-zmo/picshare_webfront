@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Login</title>
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="css/styles.css" rel="stylesheet" />
+</head>
+<body id="page-top" onload="displayLoginOrSignUp(); generateNavBar();">
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav" >
+    <div class="container" id="mainNavContainer">
+        <a class="navbar-brand js-scroll-trigger" style ="cursor:pointer;" onclick="nav('')">Home</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+</nav>
+<!--style="background: linear-gradient(to bottom, rgba(22,22,22,0.9),black ) !important;"-->
+<section class="signup-section bg-black" id="contact" style="background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 95%, #000000 100%), url('../assets/img/bigrok222.jpg');background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-size: cover; ">
+    <div class="container">
+        <div id="top-space" class="row" style="height: 10px" ></div>
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-8 mb-3 mb-md-0">
+
+
+                <div class="text-uppercase text-primary-1 text-center mx-auto pseudo-mast-2" style="position:absolute; top: 20%; left: 8.5%;">
+                    <h1 class="mx-auto my-0 text-uppercase">picshare</h1>
+                </div>
+
+                <div class="text-uppercase text-primary-1 text-center mx-auto pseudo-mast" style="position:absolute; top: 42%; left: 21%; z-index: 300">
+                    <h1 class="mx-auto my-0 text-uppercase">Your Dreams</h1>
+                    <h1 class="mx-auto my-0 text-uppercase">Start Here</h1>
+                </div>
+                <div class="slidebox" style="margin-left: 35%; margin-top: 50%; ">
+                    <span style="--i:1;"><img src="assets/img/bigrok85.jpg"></span>
+                    <span style="--i:2;"><img src="assets/img/bigrok10.jpg"></span>
+                    <span style="--i:3;"><img src="assets/img/bigrok89.jpg"></span>
+                    <span style="--i:4;"><img src="assets/img/bigrok90.jpg"></span>
+                    <span style="--i:5;"><img src="assets/img/bigrok22.jpg"></span>
+                    <span style="--i:6;"><img src="assets/img/bigrok87.jpg"></span>
+                    <span style="--i:7;"><img src="assets/img/bigrok92.jpg"></span>
+                    <span style="--i:8;"><img src="assets/img/bigrok98.jpg"></span>
+                </div>
+                <div style="height: 50px;"></div>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-4 mb-3 mb-md-0">
+                <div class="form-structor" id="parent-node" style=" margin-top: 10px; margin-left: -22px">
+                    <div class="signup" id="parent-one">
+                        <h2 class="form-title" id="signup-test" onclick="showSignupForm()"><span>or</span>Sign up</h2>
+                        <div class="row">
+                            <div class="col-2" id="icon-display">
+                                <div style="text-align: center;"><span class="far fa-envelope" style="display: inline-block; margin-top: 1.2rem; color: white; "></span></div>
+                                <div style="text-align: center;"><span class="far fa-user-circle" style="display: inline-block; margin-top: 1.2rem; color: white;"></span></div>
+                                <div style="text-align: center;"><span class="far fa-id-badge" style="display: inline-block; margin-top: 1.2rem; color: white;"></span></div>
+                                <div style="text-align: center;"><span class="far fa-id-card" style="display: inline-block; margin-top: 1.2rem; color: white;"></span></div>
+                                <div style="text-align: center;"><span class="fas fa-unlock" style="display: inline-block; margin-top: 1.2rem; color: white;"></span></div>
+                                <div style="text-align: center;"><span class="fas fa-unlock-alt" style="display: inline-block; margin-top: 1.2rem; color: white;"></span></div>
+                            </div>
+                            <div class="form-holder col-10">
+                                <input id="inputEmail"  type="Email" class="input" placeholder="Email" onkeyup="checkOnEmail()"/>
+                                <input id="userName" type="text" class="input" placeholder="Username" >
+                                <input id="firstName" type="text" class="input" placeholder="First Name" />
+                                <input id="lastName" type="text" class="input" placeholder="Last Name" />
+                                <input id="password" type="password" class="input" placeholder="Password" onkeyup="checkOnSignup()"/>
+                                <input id="confirmPassword"  type="password" class="input" placeholder="Confirm Password" onkeyup="checkOnSignup()"/>
+                            </div>
+                        </div>
+                        <button class="submit-btn" onclick="signup()">Sign up</button>
+                        <div class ="row  small" id = "message-match" style="margin-left:50px; margin-top: 10px; color: rgba(255,90,90,0) "> Passwords Do Not Match   </div>
+                    </div>
+                    <div class="login slide-up" id="parent-node-2">
+                        <div class="center" id="parent-2">
+                            <h2 class="form-title" id="login-test" onclick="showLoginForm()"><span>or</span>Log in</h2>
+                            <div class="row">
+                                <div class="col-2" style="color: black;">
+                                    <div style="text-align: center;"><span class="far fa-user-circle" style="display: inline-block; margin-top: 4.2rem;"></span> </div>
+                                    <div style="text-align: center;"><span class="fas fa-unlock-alt" style="display: inline-block; margin-top: 1.2rem;"></span></div>
+                                </div>
+                                <div class="form-holder col-10    ">
+                                    <input id="userNameLogin" type="text" class="input" placeholder="Email / Username" />
+                                    <input id="passwordLogin" type="password" class="input" placeholder="Password" />
+                                </div>
+                            </div>
+                            <button class="submit-btn" onclick="login()">Log in</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row"  style="height:75px"></div>
+</section>
+<footer class="footer bg-black small text-center text-white-50"><div class="container">Copyright © PicShare Inc. 2020</div></footer>
+<!-- Bootstrap core JS-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+<!-- Third party plugin JS-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+<!-- Core theme JS-->
+<script src="js/scripts.js"></script>
+</body>
+</html>
