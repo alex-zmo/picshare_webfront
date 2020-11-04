@@ -1462,6 +1462,7 @@ function getCookieByName(name) {
             return cookieStrings[i];
         }
     }
+    return ""
 }
 
 
