@@ -60,6 +60,7 @@
 })(jQuery); // End of use strict
 
 
+
 const nav = (page, params = {}) => {
     let paramList = [];
     for (let key in params) {
@@ -72,6 +73,9 @@ const nav = (page, params = {}) => {
 let urlHost = "http://localhost:8081";
 let urlImage = "http://localhost:8082";
 let urlComment = "http://localhost:8083";
+
+console.log(getCookieByName("auth-token"));
+let authToken =  getCookieByName("auth-token");
 
 async function changePassword() {
     let curr = document.getElementById('currentPassword').value;
@@ -103,10 +107,10 @@ async function changePassword() {
     url += "newpassword=" + hashedNewPassword + "&" +"password=" + hashedPassword;
 
     xhttp.open("GET", url);
-    if (document.cookie === undefined || document.cookie.length === 0) {
+    if (authToken === undefined || authToken.length === 0) {
         logout();
     }
-    xhttp.setRequestHeader('Authorization','Bearer ' + document.cookie.split("=")[1] );
+    xhttp.setRequestHeader('Authorization','Bearer ' + authToken.split("=")[1] );
     xhttp.send();
 }
 async function signup() {
@@ -234,10 +238,10 @@ function generateNavBar() {
 
     htmlText += generateNavItem('about');
     htmlText += generateNavItem('contact');
-    if(document.cookie === undefined || document.cookie.length === 0) {
+    if(authToken === undefined || authToken.length === 0) {
         htmlText += generateNavItem('login');
     }
-    if(!(document.cookie === undefined || document.cookie.length === 0)) {
+    if(!(authToken === undefined || authToken.length === 0)) {
         htmlText += generateNavItem('dashboard');
     }
     htmlText += "</ul> </div>";
@@ -334,10 +338,10 @@ function deleteImage() {
     url += "src=" + src
 
     xhttp.open("GET", url);
-    if (document.cookie === undefined || document.cookie.length === 0) {
+    if (authToken === undefined || authToken.length === 0) {
         logout();
     }
-    xhttp.setRequestHeader('Authorization','Bearer ' + document.cookie.split("=")[1] );
+    xhttp.setRequestHeader('Authorization','Bearer ' + authToken.split("=")[1] );
     xhttp.send();
 }
 
@@ -444,10 +448,10 @@ function writeWelcome() {
     url += "/username/";
 
     xhttp.open("GET", url);
-    if (document.cookie === undefined || document.cookie.length === 0) {
+    if (authToken === undefined || authToken.length === 0) {
         logout();
     }
-    xhttp.setRequestHeader('Authorization','Bearer ' + document.cookie.split("=")[1] );
+    xhttp.setRequestHeader('Authorization','Bearer ' + authToken.split("=")[1] );
     xhttp.send();
 }
 
@@ -468,10 +472,10 @@ function writeJoined() {
     url += "/created/";
 
     xhttp.open("GET", url);
-    if (document.cookie === undefined || document.cookie.length === 0) {
+    if (authToken === undefined || authToken.length === 0) {
         logout();
     }
-    xhttp.setRequestHeader('Authorization','Bearer ' + document.cookie.split("=")[1] );
+    xhttp.setRequestHeader('Authorization','Bearer ' + authToken.split("=")[1] );
     xhttp.send();
 }
 
@@ -492,10 +496,10 @@ function writeCount() {
     url += "/count/";
 
     xhttp.open("GET", url);
-    if (document.cookie === undefined || document.cookie.length === 0) {
+    if (authToken === undefined || authToken.length === 0) {
         logout();
     }
-    xhttp.setRequestHeader('Authorization','Bearer ' + document.cookie.split("=")[1] );
+    xhttp.setRequestHeader('Authorization','Bearer ' + authToken.split("=")[1] );
     xhttp.send();
 }
 
@@ -530,10 +534,10 @@ function writeInfo() {
     url += "/account/";
 
     xhttp.open("GET", url);
-    if (document.cookie === undefined || document.cookie.length === 0) {
+    if (authToken === undefined || authToken.length === 0) {
         logout();
     }
-    xhttp.setRequestHeader('Authorization','Bearer ' + document.cookie.split("=")[1] );
+    xhttp.setRequestHeader('Authorization','Bearer ' + authToken.split("=")[1] );
     xhttp.send();
 }
 
@@ -557,10 +561,10 @@ function writeLikesInfo() {
     url += "/likesInfo/";
 
     xhttp.open("GET", url);
-    if (document.cookie === undefined || document.cookie.length === 0) {
+    if (authToken === undefined || authToken.length === 0) {
         logout();
     }
-    xhttp.setRequestHeader('Authorization','Bearer ' + document.cookie.split("=")[1] );
+    xhttp.setRequestHeader('Authorization','Bearer ' + dauthToken.split("=")[1] );
     xhttp.send();
 }
 
@@ -581,10 +585,10 @@ function writeFavoritesInfo() {
 
     xhttp.open("GET", url);
 
-    if (document.cookie === undefined || document.cookie.length === 0) {
+    if (authToken === undefined || authToken.length === 0) {
         logout();
     }
-    xhttp.setRequestHeader('Authorization','Bearer ' + document.cookie.split("=")[1] );
+    xhttp.setRequestHeader('Authorization','Bearer ' + authToken.split("=")[1] );
 
     xhttp.send();
 }
@@ -664,7 +668,7 @@ function fileChange() {
 }
 
 function upload() {
-    if(document.cookie === undefined || document.cookie.length === 0) {
+    if(authToken === undefined || authToken.length === 0) {
         nav("login")
         return
     }
@@ -713,17 +717,17 @@ function upload() {
         }
     };
     xhttp.open("POST", urlImage + "/upload/");
-    if (document.cookie === undefined || document.cookie.length === 0) {
+    if (authToken === undefined || authToken.length === 0) {
         logout();
     }
-    xhttp.setRequestHeader('Authorization','Bearer ' + document.cookie.split("=")[1] );
+    xhttp.setRequestHeader('Authorization','Bearer ' + authToken.split("=")[1] );
     xhttp.send(formData);
 }
 
 let currLink = "";
 
 async function sendComment() {
-    if(document.cookie === undefined || document.cookie.length === 0) {
+    if(authToken === undefined || authToken === 0) {
         logout();
         return
     }
@@ -747,10 +751,10 @@ async function sendComment() {
     };
 
     xhttp.open("POST", urlComment + "/send/");
-    if (document.cookie === undefined || document.cookie.length === 0) {
+    if (authToken === undefined || authToken.length === 0) {
         logout();
     }
-    xhttp.setRequestHeader('Authorization','Bearer ' + document.cookie.split("=")[1] );
+    xhttp.setRequestHeader('Authorization','Bearer ' + authToken.split("=")[1] );
     xhttp.send(formData);
 }
 // gallery stuff
@@ -763,7 +767,7 @@ let sortDate = false;
 
 
 function checkToDisplay() {
-    if (!(document.cookie === undefined || document.cookie.length === 0)){
+    if (!(authToken === undefined || authToken.length === 0)){
         document.getElementById("display-login-or-signup").style["display"]="none";
         document.getElementById("display-buttons-or-login").style["display"]="flex";
     } else {
@@ -803,7 +807,7 @@ function downloadAnimateGreyscale4() {
 
 
 function showToggle() {
-    if(document.cookie === undefined || document.cookie.length === 0) {
+    if(authToken === undefined || authToken.length === 0) {
         return
     }
     document.getElementById("filter-bar").style["display"] = "initial";
@@ -915,14 +919,14 @@ function getImages(sLikes = false, sFaves = false, sDate = false) {
         }
     };
     let url = urlImage
-    if(document.cookie === undefined || document.cookie.length === 0 || showGlobal) {
+    if(authToken === undefined || authToken.length === 0 || showGlobal) {
         url += "/list/?";
     } else {
         url += "/listUser/?";
     }
     url+= "sLikes=" + sLikes.toString() + "&sFaves="+ sFaves.toString() + "&sDate=" + sDate.toString()
     xhttp.open("GET", url);
-    xhttp.setRequestHeader('Authorization','Bearer ' + document.cookie.split("=")[1] );
+    xhttp.setRequestHeader('Authorization','Bearer ' + authToken.split("=")[1] );
     xhttp.send();
 }
 
@@ -934,7 +938,7 @@ function doThings(i) {
     getComments();
 }
 function getComments() {
-    if (document.cookie === undefined || document.cookie.length === 0) {
+    if (authToken === undefined || authToken.length === 0) {
         return
     }
     let src = document.getElementById("image" + globalI).src;
@@ -994,11 +998,11 @@ function getComments() {
 
     url+= "src=" + src;
     xhttp.open("GET", url);
-    xhttp.setRequestHeader('Authorization','Bearer ' + document.cookie.split("=")[1] );
+    xhttp.setRequestHeader('Authorization','Bearer ' + authToken.split("=")[1] );
     xhttp.send();
 }
 function deleteComment(commentID){
-    if (document.cookie === undefined || document.cookie.length === 0) {
+    if (authToken === undefined || authToken.length === 0) {
         logout();
         return
     }
@@ -1017,10 +1021,10 @@ function deleteComment(commentID){
     url += "commentID=" + commentID
 
     xhttp.open("GET", url);
-    if (document.cookie === undefined || document.cookie.length === 0) {
+    if (authToken === undefined || authToken.length === 0) {
         logout();
     }
-    xhttp.setRequestHeader('Authorization','Bearer ' + document.cookie.split("=")[1] );
+    xhttp.setRequestHeader('Authorization','Bearer ' + authToken.split("=")[1] );
     xhttp.send();
 }
 
@@ -1055,7 +1059,7 @@ function initialFavorites(i) {
     url += "src=" + src;
 
     xhttp.open("GET", url);
-    xhttp.setRequestHeader('Authorization','Bearer ' + document.cookie.split("=")[1] );
+    xhttp.setRequestHeader('Authorization','Bearer ' + authToken.split("=")[1] );
     xhttp.send();
 }
 
@@ -1090,7 +1094,7 @@ function initialVisibility(i) {
     url += "src=" + src;
 
     xhttp.open("GET", url);
-    xhttp.setRequestHeader('Authorization','Bearer ' + document.cookie.split("=")[1] );
+    xhttp.setRequestHeader('Authorization','Bearer ' + authToken.split("=")[1] );
     xhttp.send();
 }
 
@@ -1120,10 +1124,10 @@ function hideImage() {
     url += "src=" + src;
 
     xhttp.open("GET", url);
-    if (document.cookie === undefined || document.cookie.length === 0) {
+    if (authToken === undefined || authToken.length === 0) {
         logout();
     }
-    xhttp.setRequestHeader('Authorization','Bearer ' + document.cookie.split("=")[1] );
+    xhttp.setRequestHeader('Authorization','Bearer ' + authToken.split("=")[1] );
     xhttp.send();
 }
 
@@ -1155,10 +1159,10 @@ function likeImage() {
     url += "src=" + src;
 
     xhttp.open("GET", url);
-    if (document.cookie === undefined || document.cookie.length === 0) {
+    if (authToken === undefined || authToken.length === 0) {
         logout();
     }
-    xhttp.setRequestHeader('Authorization','Bearer ' + document.cookie.split("=")[1] );
+    xhttp.setRequestHeader('Authorization','Bearer ' + authToken.split("=")[1] );
 
     xhttp.send();
 }
@@ -1187,10 +1191,10 @@ function favoriteImage() {
     url += "src=" + src;
 
     xhttp.open("GET", url);
-    if (document.cookie === undefined || document.cookie.length === 0) {
+    if (authToken === undefined || authToken.length === 0) {
         logout();
     }
-    xhttp.setRequestHeader('Authorization','Bearer ' + document.cookie.split("=")[1] );
+    xhttp.setRequestHeader('Authorization','Bearer ' + authToken.split("=")[1] );
 
     xhttp.send();
 }
@@ -1232,7 +1236,7 @@ function writeLikes(i) {
     url += "src=" + src;
 
     xhttp.open("GET", url);
-    xhttp.setRequestHeader('Authorization','Bearer ' + document.cookie.split("=")[1] );
+    xhttp.setRequestHeader('Authorization','Bearer ' + authToken.split("=")[1] );
     xhttp.send();
 }
 
@@ -1276,7 +1280,7 @@ function displayCreatedAt() {
     url += "src=" + src;
 
     xhttp.open("GET", url);
-    if (document.cookie === undefined || document.cookie.length === 0) {
+    if (authToken === undefined || authToken.length === 0) {
         logout();
     }
     xhttp.send();
@@ -1294,7 +1298,7 @@ function sendEnterComment() {
 
 
 function liveGrey(r, g, b) {
-    if (document.cookie === undefined || document.cookie.length === 0) {
+    if (authToken === undefined || dauthToken.length === 0) {
          logout();
          return
     }
@@ -1447,4 +1451,20 @@ let msgboxbox = new MessageBox("#msgbox-area", {
     closeTime: 3000,
     hideCloseButton: true
 });
+
+function getCookieByName(name) {
+    let cookieStrings = document.cookie.split(";");
+    if (cookieStrings.length < 1 || cookieStrings == "") {
+        return ""
+    }
+    for(let i in cookieStrings){
+        if (cookieStrings[i].split("=")[0].trim() === name) {
+            return cookieStrings[i];
+        }
+    }
+}
+
+
+
+
 
