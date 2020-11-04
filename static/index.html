@@ -93,7 +93,7 @@
     });
 
     function initialize(){
-        if (!(document.cookie === undefined || document.cookie.length === 0) ){
+        if (!(authToken === undefined || authToken.length === 0) ){
             document.getElementById("sign").style["display"] = "none";
             document.getElementById("visit-dash").style["display"] = "block";
         }
