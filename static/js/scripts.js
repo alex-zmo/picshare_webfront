@@ -80,7 +80,7 @@ async function changePassword() {
     if (newPassword !== confirmNewPassword) {
         document.getElementById('newChangePassword').value = "";
         document.getElementById('confirmNewChangePassword').value = "";
-        alert("Passwords do not match!");
+        alertError("Passwords do not match!");
         return;
     }
 
@@ -89,9 +89,9 @@ async function changePassword() {
         if (xhttp.readyState === 4) {
             if (xhttp.status === 201) {
                 nav("dashboard")
-                alert("Password Changed Successfully")
+                alertSuccess("Password Changed Successfully")
             } else if (xhttp.status === 409) {
-                alert(xhttp.responseText);
+                alertError(xhttp.responseText);
                 document.getElementById('currentPassword').value = "";
             }
         }
@@ -119,17 +119,17 @@ async function signup() {
     let confirmPassword = document.getElementById('confirmPassword').value;
 
     if(!validateEmail(email)) {
-        alert("Invalid Email!");
+        alertError("Invalid Email!");
         return;
     }
 
     if(!validateUsername(username) || username.length > 32) {
-        alert("Username may only contain letters a - z, A - Z and numbers 0 - 9 and be under 32 characters");
+        alertError("Username may only contain letters a - z, A - Z and numbers 0 - 9 and be under 32 characters");
         return;
     }
 
     if (password !== confirmPassword) {
-        alert("Passwords do not match!");
+        alertError("Passwords do not match!");
         return;
     }
 
@@ -139,9 +139,10 @@ async function signup() {
             if (xhttp.status === 201) {
                 // displayLogin();
                 showLoginForm();
-                alert("Account Created successfully!");
+                alertSuccess("Account Created successfully!");
             } else if (xhttp.status === 409) {
-                alert(xhttp.responseText);
+                let str = xhttp.responseText;
+                alertError(str);
             }
         }
     };
@@ -172,7 +173,7 @@ async function login() {
                 document.cookie = "auth-token=" + xhttp.responseText.split(":")[1]
                 nav("dashboard")
             } else if (xhttp.status === 401) {
-                alert("Login Failed");
+                alertError("Login Failed");
                 document.getElementById('passwordLogin').value = "";
             }
         }
@@ -286,7 +287,7 @@ function fullImage(i) {
                 }
                 currLink = xhttp.responseText;
             } else if (xhttp.status === 404) {
-                alert("Image Not Available");
+                alertError("Image Not Available");
             }
         }
     };
@@ -317,10 +318,15 @@ function deleteImage() {
     xhttp.onreadystatechange = function() {
         if (xhttp.readyState === 4) {
             if (xhttp.status === 200) {
-                nav("gallery");
-                alert("Delete Successful")
-            } else if (xhttp.status === 401) {
-                alert("Error: Unable to Delete!");
+                setTimeout(function () {
+                    alertSuccess("Delete Successful")
+                }, 10);
+                setTimeout(function () {
+                    nav("gallery");
+                }, 2000);
+
+                } else if (xhttp.status === 401) {
+                alertError("Error: Unable to Delete!");
             }
         }
     };
@@ -339,19 +345,17 @@ function checkOnSignup() {
     if (document.getElementById('password').value ===
         document.getElementById('confirmPassword').value) {
         document.getElementById('message-match').style["color"] = "rgba(0,0,0,0) "
-        document.getElementById('message').innerHTML = ' Passwords Do Not Match';
     } else {
         document.getElementById('message-match').style["color"] = "rgba(255,90,90,1) "
         document.getElementById('message-match').innerHTML = 'Passwords Do Not Match';
     }
 }
 function checkOnEmail() {
-    if (validateEmail(document.getElementById('inputEmail').value) || document.getElementById('inputEmail').value ==="") {
+    if (validateEmail(document.getElementById('inputEmail').value) || document.getElementById('inputEmail').value === "") {
         document.getElementById('message-match').style["color"] = "rgba(0,0,0,0) "
-        document.getElementById('message').innerHTML = ' Email Not Valid';
     } else {
+        document.getElementById('message-match').innerHTML = ' Email Not Valid';
         document.getElementById('message-match').style["color"] = "rgba(255,90,90,1) "
-        document.getElementById('message-match').innerHTML = 'Email Not Valid';
     }
 }
 // Script for animation
@@ -673,7 +677,7 @@ function upload() {
     let formData = new FormData();
     let file = document.getElementById("image-upload").files[0]
     if(file === undefined) {
-        alert("Please choose an image.")
+        alertError("Please choose an image.")
         return
     }
     formData.append("pic", file);
@@ -682,10 +686,29 @@ function upload() {
     xhttp.onreadystatechange = function() {
         if (xhttp.readyState === 4) {
             if (xhttp.status === 200) {
-                nav('dashboard');
+                alertSuccess("Upload Successful");
+                if (document.getElementById("wait-on-upload") != null) {
+                    document.getElementById("wait-on-upload").style["display"] = "none";
+                }
+                setTimeout(function(){
+                    closeModalUpload();
+                }, 2000);
+                setTimeout(function(){
+                    nav('dashboard');
+                }, 2000);
+
             } else if (xhttp.status === 409){
-                alert("failed to upload")
-                nav('dashboard')
+                alertError("Upload Failed");
+                if (document.getElementById("wait-on-upload") != null) {
+                    document.getElementById("wait-on-upload").style["display"] = "none";
+                }
+                setTimeout(function(){
+                    closeModalUpload();
+                }, 2000);
+                setTimeout(function(){
+                    nav('dashboard');
+                    }, 2000);
+
             }
         }
     };
@@ -718,7 +741,7 @@ async function sendComment() {
                 document.getElementById("comment-input").value ="";
                 getComments();
             } else if (xhttp.status === 409){
-                alert("failed to comment")
+                alertError("Failed to comment")
             }
         }
     };
@@ -985,7 +1008,7 @@ function deleteComment(commentID){
             if (xhttp.status === 200) {
                 getComments()
             } else if (xhttp.status === 401) {
-                alert("Error: Unable to Delete!");
+                alertError("Unable to Delete!");
             }
         }
     };
@@ -1021,7 +1044,7 @@ function initialFavorites(i) {
                     }
                 }
             } else {
-                alert("Error in initial Favorites");
+                alertError("Error in initial Favorites");
             }
         }
     };
@@ -1056,7 +1079,7 @@ function initialVisibility(i) {
                 }
 
             } else {
-                alert("Error in initial Visibility");
+                alertError("Error in initial Visibility");
             }
         }
     };
@@ -1087,9 +1110,9 @@ function hideImage() {
                     document.getElementById("visibility").style["color"] = "rgba(255,255,255,0.5)"
                 }
             } else if (xhttp.status === 401) {
-                alert("Error: Unauthorized Account!");
+                alertError("Unauthorized Account!");
             } else if (xhttp.status === 412) {
-                alert("Unexpected Error: Please Try Again!");
+                alertError("Unexpected Error: Please Try Again!");
             }
         }
     };
@@ -1124,7 +1147,7 @@ function likeImage() {
                     document.getElementById("like-heart").style["color"] = "black";
                 }
             } else if (xhttp.status === 401) {
-                alert("Error: Unauthorized Account!");
+                alertError("Unauthorized Account!");
             }
         }
     };
@@ -1156,7 +1179,7 @@ function favoriteImage() {
                     document.getElementById("add-favorite").style["color"] = "black";
                 }
             } else if (xhttp.status === 401) {
-                alert("Error: Unauthorized Account!");
+                alertError("Unauthorized Account!");
             }
         }
     };
@@ -1198,7 +1221,7 @@ function writeLikes(i) {
                 }
 
             } else {
-                alert("Write Likes Failed");
+                alertError("Write Likes Failed");
             }
         }
     };
@@ -1301,3 +1324,127 @@ function liveGrey(r, g, b) {
     xhttp.open("GET", url);
     xhttp.send();
 }
+
+
+function alertSuccess(str) {
+    msgboxbox.show(str);
+}
+
+function alertError(str) {
+    msgboxbox.show(str);
+}
+
+
+class MessageBox {
+    constructor(id, option) {
+        this.id = id;
+        this.option = option;
+    }
+
+    show(msg, label = "X", callback = null) {
+        if (this.id === null || typeof this.id === "undefined") {
+            // if the ID is not set or if the ID is undefined
+
+            throw "Please set the 'ID' of the message box container.";
+        }
+
+        if (msg === "" || typeof msg === "undefined" || msg === null) {
+            // If the 'msg' parameter is not set, throw an error
+
+            throw "The 'msg' parameter is empty.";
+        }
+
+        if (typeof label === "undefined" || label === null) {
+            // Of the label is undefined, or if it is null
+
+            label = "X";
+        }
+
+        let option = this.option;
+
+        let msgboxArea = document.querySelector(this.id);
+        let msgboxBox = document.createElement("DIV");
+        let msgboxContent = document.createElement("DIV");
+        let msgboxClose = document.createElement("A");
+
+        if (msgboxArea === null) {
+            // If there is no Message Box container found.
+
+            throw "The Message Box container is not found.";
+        }
+
+        // Content area of the message box
+        msgboxContent.classList.add("msgbox-content");
+        msgboxContent.innerText = msg;
+
+        // Close button of the message box
+        msgboxClose.classList.add("msgbox-close");
+        msgboxClose.setAttribute("href", "#");
+        msgboxClose.innerText = label;
+
+        // Container of the Message Box element
+        msgboxBox.classList.add("msgbox-box");
+        msgboxBox.appendChild(msgboxContent);
+
+        if (option.hideCloseButton === false
+            || typeof option.hideCloseButton === "undefined") {
+            // If the hideCloseButton flag is false, or if it is undefined
+
+            // Append the close button to the container
+            msgboxBox.appendChild(msgboxClose);
+        }
+
+        msgboxArea.appendChild(msgboxBox);
+
+        msgboxClose.addEventListener("click", (evt) => {
+            evt.preventDefault();
+
+            if (msgboxBox.classList.contains("msgbox-box-hide")) {
+                // If the message box already have 'msgbox-box-hide' class
+                // This is to avoid the appearance of exception if the close
+                // button is clicked multiple times or clicked while hiding.
+
+                return;
+            }
+
+            this.hide(msgboxBox, callback);
+        });
+
+        if (option.closeTime > 0) {
+            this.msgboxTimeout = setTimeout(() => {
+                this.hide(msgboxBox, callback);
+            }, option.closeTime);
+        }
+    }
+
+    hide(msgboxBox, callback) {
+        if (msgboxBox !== null) {
+            // If the Message Box is not yet closed
+
+            msgboxBox.classList.add("msgbox-box-hide");
+        }
+
+        msgboxBox.addEventListener("transitionend", () => {
+            if (msgboxBox !== null) {
+                // If the Message Box is not yet closed
+
+                msgboxBox.parentNode.removeChild(msgboxBox);
+
+                clearTimeout(this.msgboxTimeout);
+
+                if (callback !== null) {
+                    // If the callback parameter is not null
+                    callback();
+                }
+            }
+        });
+    }
+}
+
+
+// Creation of Message Box class, and the sample usage
+let msgboxbox = new MessageBox("#msgbox-area", {
+    closeTime: 3000,
+    hideCloseButton: true
+});
+
