@@ -564,7 +564,7 @@ function writeLikesInfo() {
     if (authToken === undefined || authToken.length === 0) {
         logout();
     }
-    xhttp.setRequestHeader('Authorization','Bearer ' + dauthToken.split("=")[1] );
+    xhttp.setRequestHeader('Authorization','Bearer ' + authToken.split("=")[1] );
     xhttp.send();
 }
 
