@@ -14460,19 +14460,25 @@ body .container-three .card_inner__cta button:hover {
 /*****************************/
 
 @media screen and (min-width:0px) and (max-width:400px)  {
-  html { font-size: 30%; }
+
+  html { font-size: 60%;
+
+  }
+  body {
+    overflow-x: hidden !important;
+  }
   .slidebox span {
     width: 30%;
     height: 30%;
     transform: rotateY(calc(var(--i) * 45deg)) translateZ(80px) ;
   }
   .container-stack {
-    margin-top: 40px;
+    margin-top: 20px;
     margin-left: -10px;
   }
   .container-stack img
   {
-    width: 10%;
+    width: 15%;
   }
 
 
@@ -14573,7 +14579,7 @@ body .container-three .card_inner__cta button:hover {
 }
 
 @media screen and (min-width:400px) and (max-width:600px) {
-  html { font-size: 50%; }
+  html { font-size: 60%; }
   .slidebox span {
     width: 50%;
     height: 50%;
