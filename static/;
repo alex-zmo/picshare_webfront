@@ -70,11 +70,11 @@ const nav = (page, params = {}) => {
     window.location.replace(page === '' ? '/' : '/' + page + '.html' +paramString);
 }
 
-let urlHost = "https://www.wspicshare.com:8081";
-let urlImage = "https://www.wspicshare.com:8082";
-let urlComment = "https://www.wspicshare.com:8083";
+let urlHost = "https://3.129.135.117:8081";
+let urlImage = "https://3.129.135.117:8082";
+let urlComment = "https://3.129.135.117:8083";
 
-
+console.log(getCookieByName("auth-token"));
 let authToken =  getCookieByName("auth-token");
 
 async function changePassword() {
@@ -573,7 +573,7 @@ function writeFavoritesInfo() {
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState === 4) {
             if (xhttp.status === 200) {
-        
+                console.log(xhttp.responseText)
                 document.getElementById("favorite-count-total").innerHTML =  xhttp.responseText.split(" ")[0].toLowerCase();
             }
         }
@@ -950,7 +950,8 @@ function getComments() {
                 if(document.getElementById("comment-list") === null) {
                     return
                 }
-                comments = JSON.parse(xhttp.responseText);
+                comments = JSON.parse(xhttp.responseText)
+                console.log(comments)
                 // comments = xhttp.responseText.substring(1,xhttp.responseText.length-2).split(" s*p*l*i*t ");
                 let commentWrapper = document.getElementById("comment-list");
                 commentWrapper.innerHtml =  '';
@@ -1297,7 +1298,7 @@ function sendEnterComment() {
 
 
 function liveGrey(r, g, b) {
-    if (authToken === undefined || authToken.length === 0) {
+    if (authToken === undefined || dauthToken.length === 0) {
          logout();
          return
     }
